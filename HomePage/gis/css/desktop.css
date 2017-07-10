@@ -1,0 +1,666 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding:0;
+    background-color: White;
+}
+/*width:1024px; height:670px;*/
+#mapDiv {
+    width: 100%;
+    height: 100%;
+}
+
+#map-control-panel{
+    width:0px;
+    height:100%;
+    background-color:#FFFFFF;
+    color:#000000;right:0px;
+    border-left:solid 1px #999;
+    position:absolute;
+    right:0px;
+    top:0px;
+    z-index: 99;
+}
+
+
+.defaultDis{
+    display:none;
+}
+
+#panel-title {
+    height: 40px;
+    line-height: 40px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    font-size: 14px;
+}
+
+#map-toolbar SPAN {
+    width: 60px;
+    display: block;
+    height: 75px;
+    -webkit-border-radius: 8px;
+    background-position: center;
+    background-repeat: no-repeat;
+    line-height: 132px;
+    text-align: center;
+}
+
+#btnCloseNav {
+    float: left;
+    height: 20px;
+    width: 20px;
+    margin:10px;
+    background: url(../images/arrow_left.png) center no-repeat;
+    background-size: 20px 20px;
+    cursor: pointer;
+}
+
+.unSelectedSwitchBtnMap
+{
+    -webkit-transition-duration: 1s;
+    -webkit-transition-property: backgroundColor;
+    -webkit-transition-timing-function: ease;
+    border: 1px solid #dce1e6;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    position: absolute;
+    font-size: 10px;
+    font-weight: bold;
+    right: 20px;
+    color: #8c96a0;
+    background: -webkit-linear-gradient(top,#f2f3f7,#e4e8ec);
+    outline: none;
+}
+
+.selectedSwitchBtnMap
+{
+    -webkit-transition-duration: 1s;
+    -webkit-transition-property: backgroundColor;
+    -webkit-transition-timing-function: ease;
+    border: 1px solid #dce1e6;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    position: absolute;
+    font-size: 10px;
+    font-weight: bold;
+    right: 20px;
+    background: -webkit-linear-gradient(top,#42a4e0,#2e88c0);
+    color: #fff;
+    outline: none;
+}
+
+.switchmap {
+	-webkit-transition-duration: 1s;
+	-webkit-transition-timing-function: ease;
+	border: 1px solid gray;
+	border-radius: 5px;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	font-size: 10px;
+	font-weight: bold;
+	right: 10px;
+	background: -webkit-linear-gradient(top,#42a4e0,#2e88c0);
+	color: #fff;
+    background-image: url(../images/imageMap.png);
+    cursor: pointer;
+}
+
+.layers {
+    -webkit-transition-duration: 1s;
+    -webkit-transition-timing-function: ease;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    font-size: 10px;
+    font-weight: bold;
+    right: 10px;
+    color: #fff;
+    background: url(../images/layers.png) center no-repeat;
+    background-size:50px 50px;
+    cursor: pointer;
+
+}
+.zoomfull {
+	-webkit-transition-duration: 1s;
+	-webkit-transition-timing-function: ease;
+	border: 1px solid gray;
+	border-radius: 5px;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	font-size: 10px;
+	font-weight: bold;
+	right: 10px;
+	background: -webkit-linear-gradient(top,#42a4e0,#2e88c0);
+	color: #fff;
+}
+
+.clearmap {
+	-webkit-transition-duration: 1s;
+	-webkit-transition-timing-function: ease;
+	border: 1px solid gray;
+	border-radius: 5px;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	font-size: 10px;
+	font-weight: bold;
+	right: 10px;
+	background: -webkit-linear-gradient(top,#42a4e0,#2e88c0);
+	color: #fff;
+}
+
+
+
+#iSearchFlag {
+    position: absolute;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    font-family: verdana,helvetica;
+    font-weight: bold;
+    line-height: 30px;
+    border: 1px solid gray;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: white;
+    color: #3cc44b;
+    cursor: pointer;
+}
+
+.isearch-selected {
+    color: white !important;
+    background-color: #3cc44b !important;
+}
+
+/*#btn-zoomfull {*/
+    /*background: url(../images/earth.png) center no-repeat;*/
+    /*background-size: 50px 50px;*/
+    /*cursor: pointer;*/
+/*}*/
+
+
+#btnMeasure {
+    background-image: url(../images/measure_48.png);
+    cursor: pointer;
+}
+
+#btnDraw {
+    background-image: url(../images/draw_40.png);
+    cursor: pointer;
+}
+
+#btn-search {
+    background-image: url(../images/search.png);
+}
+
+#btn-phone {
+    background-image: url(../images/phone.png);
+}
+
+#btn-chart {
+    background-image: url(../images/chart.png);
+}
+
+#btn-about {
+    background-image: url(../images/about.png?a);
+}
+
+/*#btn-clearmap {*/
+    /*background: url(../images/erase.png) center no-repeat;*/
+    /*background-size: 30px 30px;*/
+    /*cursor: pointer;*/
+/*}*/
+
+#mapFileInput {
+    position: absolute;
+    z-index: 2;
+    font-size: 30px;
+    opacity: 0;
+}
+
+* {
+    border-color: #999999;
+    font-family: 微软雅黑;
+}
+
+
+
+#navName {
+    float:left;
+    height: 40px;
+    line-height:40px;
+    margin-left:40px;
+}
+
+.draglist {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    font-size: 12px;
+}
+
+    .draglist LI {
+        display: block;
+        height: 35px;
+        line-height: 35px;
+        margin: 0px;
+        border-bottom: dashed 1px #ccc;
+    }
+
+.touchActive {
+    background-color: #52bbd2 !important;
+    color: White !important;
+}
+
+.touchdown {
+    background-color: #369fa6 !important;
+    color: #FFFFFF !important;
+}
+
+.button {
+    height: 35px;
+    line-height: 35px;
+    color: White;
+    padding: 0px 10px;
+    background-color: #278194;
+    box-shadow: 1px 1px 2px #999;
+    min-width: 80px;
+    text-align: center;
+    float: right;
+    margin: 10px;
+    border-radius: 2px;
+}
+
+.eye {
+    background: url(../images/pc/eye.png?a) right center no-repeat;
+}
+
+.hsplit {
+    height: 2px;
+    margin: 10px;
+    border-bottom: solid 1px #9999999;
+}
+
+#graphicAttributeScroller {
+    overflow: hidden;
+}
+
+.prolist{
+    font-size: 10px;
+}
+
+.prolist DIV {
+    text-indent: 2em;
+    min-height: 20px;
+    height: auto;
+    line-height: 20px;
+    border-bottom: dashed 1px #ccc;
+    clear: both;
+}
+
+    .prolist DIV SPAN {
+        background-color: #5eb2cb;
+        text-indent: 0em;
+        margin-top: 4px;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        display: block;
+        float: left;
+        min-width: 80px;
+        font-size: 12px;
+        color: White;
+        border-radius: 5px;
+    }
+
+
+
+/*layer-manager*/
+.layer-container {
+    height: 100%;
+    /*overflow: hidden;*/
+}
+
+.layer-map-selector {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: solid 1px #999999;
+    text-align: center;
+}
+
+    .layer-map-selector SELECT {
+        height: 30px;
+        line-height: 30px;
+        width: 99%;
+    }
+
+.layer-titlebar {
+    height: 35px;
+    line-height: 35px;
+    border-bottom: solid 1px #999;
+}
+
+.layer-listbox {
+    min-height: 100px;
+}
+
+.layer-eye {
+    width: 50px;
+    height: 35px;
+    float: left;
+    background: url(../images/eye_disabled.png) center no-repeat;
+    background-size: 25px 25px;
+}
+
+.eye-selected {
+    background-image: url(../images/eye.png) !important;
+}
+
+.layer-address {
+    margin-left: 5px;
+    height: 35px;
+    font-size: 13px;
+}
+
+    .layer-address DIV:first-child {
+        display: block !important;
+    }
+
+    .layer-address DIV {
+        float: left;
+        display: none;
+        height: 20px;
+        margin-top: 5px;
+        line-height: 20px;
+        background-image: url(../images/arrow_right.png);
+        background-position: right center;
+        background-repeat: no-repeat;
+        padding-right: 20px;
+        margin-right: 5px;
+        text-indent: 5px;
+        border: dashed 1px #ccc;
+    }
+
+        .layer-address DIV:last-child {
+            background-image: none;
+            background-color: #52bbd2;
+            color: White;
+            border-radius: 4px;
+        }
+
+.category {
+}
+
+.layer-list-text {
+    float: left;
+}
+
+.layer-list-text-category {
+    /*float: none;
+    margin-left: 60px;
+    margin-right: 60px;*/
+}
+
+.layer-list-next {
+    float: right;
+    width: 50px;
+    height: 35px;
+    background: url(../images/next.png?ab) center no-repeat;
+    -webkit-background-size: 25px;
+    background-size: 25px;;
+}
+
+.layer-list-scroll {
+    height: 230px;
+    border-bottom: solid 1px #999999;
+    overflow-y:auto;
+}
+
+.widget-button {
+    margin: 10px;
+    height: 25px;
+    line-height: 25px;
+    border: solid 1px #cccccc;
+    box-shadow: 0px 0px 3px #999999;
+    background-color: #dddddd;
+    text-align: center;
+    border-radius: 4px;
+    color: #1a2545;
+    font-size: 14px;
+}
+
+.but-selected {
+    background-color: #5eb2cb !important;
+    color: White;
+}
+
+.measure-value {
+    height: 30px;
+    min-height: 30px;
+    margin: 20px;
+    color: Green;
+    text-align: center;
+    font-family: Arial;
+    font-size: 16px;
+    margin-top: 40px;
+}
+
+.widget-param {
+    height: 40px;
+    line-height: 40px;
+    margin: 5px;
+    clear: both;
+}
+
+.widget-param-name {
+    float: left;
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    color: White;
+    margin: 5px;
+    width: 60px;
+    border-radius: 4px;
+    background-color: #5eb2cb !important;
+    text-align: center;
+}
+
+.widget-param-input {
+    float: left;
+    margin: 3px 20px;
+    height: 25px;
+    line-height: 25px;
+}
+
+    .widget-param-input SELECT, .widget-param-input INPUT {
+        width: 100px;
+        height: 25px;
+    }
+
+.opacityBox {
+    height: 70px;
+    line-height: 10px;
+    font-size: 12px;
+}
+
+.layersOpacityline {
+    float: left;
+    height: 10px;
+    width: 170px;
+    background-color: #787878;
+    margin: 10px 20px;
+    position: relative;
+}
+
+.layersOpacitylineButton {
+    height: 30px;
+    width: 20px;
+    background-color: green;
+    position: relative;
+    top: -10px;
+    left: 170px;
+}
+
+.border {
+    border: solid 1px green;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.margin {
+    margin: 5px;
+}
+
+.floatLeft {
+    float: left;
+}
+
+.floatRight {
+    float: right;
+}
+
+.marginLeft {
+    margin-left: 5px;
+}
+
+.marginRight {
+    margin-right: 5px;
+}
+
+#pointSizeDown {
+    float: left;
+}
+
+#pointUnit {
+    float: left;
+    width: 10%;
+}
+
+#pointSize {
+    float: left;
+    width: 10%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#pointSizeUp {
+    float: left;
+}
+
+#polylineSizeDown {
+    float: left;
+}
+
+#polylineUnit {
+    float: left;
+    width: 10%;
+}
+
+#polylineSize {
+    float: left;
+    width: 10%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#polylineSizeUp {
+    float: left;
+}
+
+.borderBottom {
+    border-bottom: solid 1px #cccccc;
+    line-height: 25px;
+}
+
+.block {
+    display: inline-block;
+}
+/*地名查询标题*/
+.pp-place-title {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: 5px;
+    cursor: pointer;
+    line-height: 1.2em;
+    color: #15c;
+    font-family: arial,sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+}
+/*地名查询地址*/
+.pp-headline-address {
+    display: inline;
+    margin-bottom: 1px;
+    color: #000;
+    font-family: arial,sans-serif;
+    font-size: 10px;
+}
+
+
+.togglepanel {
+    position: absolute;
+    z-index: 10;
+    display: none;
+    border: solid 1px #999999;
+    bottom: 10px;
+    right: 280px;
+}
+
+
+
+.btnBlue {
+    float: right;
+    margin-right: 10px;
+    color: #FFFFFF;
+    border: solid 1px #0076C3;
+    background: #6A6AFF;
+    background: -webkit-gradient(linear, left top, left bottom, from(#6A6AFF), to(#0000A6));
+    -webkit-border-radius: 8px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    margin-top: 5px;
+    height: 28px;
+    width: 35px;
+    padding: 5px;
+}
+
+#FavoriteId {
+    background: url(../images/addFavrite.png) center no-repeat;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    float: left;
+}
+
+.favAddressDiv {
+    width: 220px;
+    float: left;
+    line-height: 30px;
+    height: 30px;
+}
+/*自定义infowindow的详情样式*/
+a.locate {
+    float:right;
+}
+
+/*信息窗口样式 liuxb*/
+table.imagetable { margin:0;padding:0; width:100%; font-family:verdana,arial,sans-serif; font-size:11px; color:#333333;border-width:1px; border-color:#999999; border-collapse: collapse;}
+table.imagetable th {background:#b5cfd2 url('../images/cell-blue.jpg'); border-width:1px; padding:8px; border-style:solid; border-color: #999999;}
+table.imagetable td {background: #dcddc0 url('../images/cell-grey.jpg'); border-width:1px; padding:8px; border-style:solid; border-color:#999999;}

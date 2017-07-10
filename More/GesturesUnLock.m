@@ -1,0 +1,453 @@
+//
+//  GesturesUnLock.m
+//  iPortal
+//
+//  Created by xiao on 14-11-24.
+//  Copyright (c) 2014年 sh. All rights reserved.
+//
+#define btn_Width 50
+#define btn_Padding (300-3*btn_Width)/4
+
+#import "GesturesUnLock.h"
+
+#import "LoginViewController.h"
+#import "MBProgressHUD+MJ.h"
+#import "SettingViewController.h"
+
+@interface GesturesUnLock ()
+@property (nonatomic, assign) CGPoint lineStartPoint;
+@property (nonatomic, assign) CGPoint lineEndPoint;
+
+@property (nonatomic, strong) UIImage *pointImage;
+@property (nonatomic, strong) UIImage *selectedImage;
+
+@property (nonatomic,strong)UIButton *loginBtn;
+@property (nonatomic,assign)BOOL test;
+//自定义UIAlertView
+@property (nonatomic,strong)UIAlertView *customAlertView;
+//UIAlertView上的输入框
+@property (nonatomic,strong)UITextField *nameField;
+@end
+
+@implementation GesturesUnLock
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //是否是主页
+    if (self.isHomePage==YES) {
+        self.btnBack.alpha=0;
+        self.otherStyle.alpha = 1.0;
+        self.forgetPassWord.alpha = 0;
+    }
+    else
+        
+    {
+        self.btnBack.alpha=1.0;
+        self.otherStyle.alpha = 0.0;
+        self.forgetPassWord.alpha = 1.0;
+    }
+    
+    self.navigationController.navigationBar.hidden = YES;
+//    self.navigationController.navigationBarHidden= YES;
+    
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+//    self.navigationController.navigationBar.hidden= YES;
+}
+
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithRed:37/255.0 green:145/255.0 blue:136/255.0 alpha:1.000];
+    
+    self.tabBarController.tabBar.hidden= YES;
+    self.btnArray=[NSMutableArray array];
+    self.rightPassword=[NSMutableArray array];
+    self.waitSure=[NSMutableArray array];
+    
+    self.pointImage = [UIImage imageNamed:@"normal.png"];
+    self.selectedImage = [UIImage imageNamed:@"point.png"];
+    
+    self.view.tag = 222;//过滤手势
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSDictionary *dic=[userDefaults objectForKey:@"touchLock"];
+    self.rightPassword=[NSMutableArray arrayWithArray:[dic objectForKey:@"password"]];
+    
+    //    [userDefaults synchronize];
+    [NSTimer scheduledTimerWithTimeInterval:.3 target:self selector:@selector(initView) userInfo:nil repeats:NO];
+    //[self initView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(change) name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+}
+
+- (void)change
+{
+    CGFloat y = 0;
+    
+    if (MainR.size.height==480) {
+        y=CGRectGetMaxY(_lblHint.frame)-40;
+    }
+    else
+    {
+        
+        y=CGRectGetMaxY(_lblHint.frame)+20;
+        
+    }
+    
+    _lockView.frame = CGRectMake(MainR.size.width/2-150,y, 300, 300);
+    //    NSLog(@"lockView::%@",_lockView);
+    for (int i=0; i<_btnArray.count; i++)
+    {
+        int row=i/3;
+        int col=i%3;
+        ZQButton *btn=_btnArray[i];
+        btn.frame=CGRectMake(btn_Padding+(btn_Width+btn_Padding)*row, btn_Padding+(btn_Width+btn_Padding)*col, btn_Width, btn_Width);
+        
+    }
+}
+-(void)initView
+{
+    CGFloat y = 0;
+    if (MainR.size.height==480) {
+        y=CGRectGetMaxY(_lblHint.frame)-40;
+    }
+    else
+    {
+    y=CGRectGetMaxY(_lblHint.frame)+20;
+    
+    }
+    _lockView=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-150,y, 300, 300)];
+    
+    _lockView.backgroundColor=[UIColor clearColor];
+
+    [self.view addSubview:_lockView];
+    
+    for (int i=0; i<9; i++) {
+        int row=i/3;
+        int col=i%3;
+        ZQButton *btn=[ZQButton buttonWithType:UIButtonTypeCustom];
+        btn.frame=CGRectMake(btn_Padding+(btn_Width+btn_Padding)*row, btn_Padding+(btn_Width+btn_Padding)*col, btn_Width, btn_Width);
+        btn.backgroundColor=[UIColor clearColor];
+        btn.userInteractionEnabled=NO;
+        btn.tag=i;
+        [btn setImage:self.pointImage forState:UIControlStateNormal];
+        [_lockView addSubview:btn];
+        [self.btnArray addObject:btn];
+    }
+    if (self.Flag==YES &&self.reSet==YES) {
+        if (self.rightPassword!=nil) {
+            self.lblHint.text=@"请绘制原始密码";
+        }
+        else{
+            self.lblHint.text=@"您从未设置过手势密码，直接绘制";
+            self.reSet=NO;
+        }
+    }
+    else if (self.Flag==YES) {
+        self.lblHint.text=@"请绘制手势密码";
+    }
+    else
+        self.lblHint.text=@"请滑动手势解锁";
+    
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    self.selectedArray=[[NSMutableArray alloc]initWithCapacity:9];
+    
+    UITouch *touch=[touches anyObject];
+    if (touch) {
+        for (ZQButton *btn in self.btnArray) {
+            CGPoint touchPoint = [touch locationInView:btn];
+            if ([btn pointInside:touchPoint withEvent:nil]) {
+                self.lineStartPoint = btn.center;
+                btn.isClicked=YES;
+                [self.selectedArray addObject:btn];
+                [btn setImage:self.selectedImage forState:UIControlStateNormal];
+            }
+        }
+    }
+}
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    if (touch) {
+        self.lineEndPoint = [touch locationInView:self.lockView];
+        
+        for (ZQButton *btn in self.btnArray) {
+            CGPoint touchPoint = [touch locationInView:btn];
+            
+            if ([btn pointInside:touchPoint withEvent:nil]) {
+                if (btn.isClicked==YES) {
+                    break;
+                }
+                else{
+                    btn.isClicked=YES;
+                    [self.selectedArray addObject:btn];
+                    [btn setImage:self.selectedImage forState:UIControlStateNormal];
+                }
+            }
+        }
+        
+        self.lockView.image=[self drawUnlockLine];
+    }
+}
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self outputSelectedButtons];
+    if (self.selectedArray.count<1) {
+        NSLog(@"未选择，退出");
+        //        return;
+    }
+    else if (self.Flag==YES&&self.reSet==YES) {
+        NSMutableArray *currentNumbers=[NSMutableArray array];
+        for (int i=0; i<self.selectedArray.count; i++) {
+            ZQButton *btn=[self.selectedArray objectAtIndex:i];
+            NSNumber *num=[NSNumber numberWithInteger:btn.tag];
+            [currentNumbers addObject:num];
+            btn.isClicked=NO;
+        }
+        if ([currentNumbers isEqualToArray:self.rightPassword]) {
+            self.lblHint.text=@"密码正确，现在请输入新密码";
+            NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+            [userDefaults removeObjectForKey:@"touchLock"];
+            self.reSet=NO;
+            //            return;
+        }
+        else{
+            self.lblHint.text=@"原密码错误";
+        }
+    }
+    else if (self.Flag==YES&&self.reSet==NO){
+        if (self.sureFlag==NO) {
+            for (int i=0; i<self.selectedArray.count; i++) {
+                ZQButton *btn=[self.selectedArray objectAtIndex:i];
+                NSNumber *num=[NSNumber numberWithInteger:btn.tag];
+                [self.waitSure addObject:num];
+                btn.isClicked=NO;
+            }
+            self.lblHint.text=@"重复上一次的密码";
+            self.sureFlag=YES;
+            //            return;
+        }
+        else if (self.sureFlag==YES){
+            NSMutableArray *currentNumbers=[NSMutableArray array];
+            for (int i=0; i<self.selectedArray.count; i++) {
+                ZQButton *btn=[self.selectedArray objectAtIndex:i];
+                NSNumber *num=[NSNumber numberWithInteger:btn.tag];
+                [currentNumbers addObject:num];
+                btn.isClicked=NO;
+            }
+            if ([currentNumbers isEqualToArray:self.waitSure]) {
+                NSDictionary *dic=[[NSDictionary alloc]initWithObjectsAndKeys:@"YES",@"isLock",currentNumbers,@"password", nil];
+                NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+                [userDefaults setObject:dic forKey:@"touchLock"];
+                self.lblHint.text=@"密码设置成功";
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"PassworldResetSuccess" object:nil];
+                
+                
+                self.Flag=NO;
+                NSString *switchOn=@"YES";
+                [self performSelector:@selector(popToPreVC:) withObject:switchOn afterDelay:1];
+                //                return;
+            }
+            else{
+                self.lblHint.text=@"重复密码错误，请重新设置";
+                [self.waitSure removeAllObjects];
+                self.sureFlag=NO;
+                //                return;
+            }
+        }
+    }
+    else if (self.Flag==NO)
+    {
+        NSMutableArray *checkArray=[NSMutableArray array];
+        NSLog(@"解锁");
+        NSLog(@"selectedButtons.count:%lu:正确密码:%@",(unsigned long)self.selectedArray.count,self.rightPassword);
+        for (int i=0; i<self.selectedArray.count; i++) {
+            ZQButton *btn=[self.selectedArray objectAtIndex:i];
+            NSNumber *num=[NSNumber numberWithInteger:btn.tag];
+            [checkArray addObject:num];
+            btn.isClicked=NO;
+        }
+        if ([checkArray isEqualToArray:self.rightPassword]) {
+            self.lblHint.text=@"解密成功";
+            //MainViewController *mainVC=[[MainViewController alloc]init];
+            //[self.navigationController pushViewController:mainVC animated:YES];
+            //self.navigationController.navigationBarHidden=NO;
+            [self.navigationController popViewControllerAnimated:NO];
+        }
+        else{
+            self.lblHint.text=@"密码错误，请重试";
+            NSLog(@"密码错误，请重试");
+        }
+    }
+    self.lockView.image = nil;
+    self.selectedArray=nil;
+}
+#pragma mark - Draw Line
+
+- (UIImage *)drawUnlockLine
+{
+    UIImage *image = nil;
+    
+    UIColor *color = [UIColor whiteColor];
+    CGFloat width = 5.0f;
+    CGSize imageContextSize = self.lockView.frame.size;
+    
+    UIGraphicsBeginImageContext(imageContextSize);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, width);
+    CGContextSetStrokeColorWithColor(context, [color CGColor]);
+    
+    CGContextMoveToPoint(context, self.lineStartPoint.x, self.lineStartPoint.y);
+    
+    for (ZQButton *selectedBtn in self.selectedArray) {
+        CGPoint btnCenter = selectedBtn.center;
+        CGContextAddLineToPoint(context, btnCenter.x, btnCenter.y);
+        CGContextMoveToPoint(context, btnCenter.x, btnCenter.y);
+    }
+    CGContextAddLineToPoint(context, self.lineEndPoint.x, self.lineEndPoint.y);
+    CGContextStrokePath(context);
+    
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+- (void)outputSelectedButtons
+{
+    for (ZQButton *btn in self.selectedArray) {
+        [btn setImage:self.pointImage forState:UIControlStateNormal];
+        NSLog(@"Selected-button's tag : %ld\n", (long)btn.tag);
+    }
+}
+- (IBAction)back:(id)sender {
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSDictionary *dic=[userDefaults objectForKey:@"touchLock"];
+    if (dic==nil) {
+        UIAlertView *lockAlert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"您尚未设置手势密码,仍然要退出吗?" delegate:self cancelButtonTitle:@"继续设置" otherButtonTitles:@"退出", nil];
+        [lockAlert show];
+    }
+    else
+    {
+        
+
+        [self popToPreVC:nil];
+        
+}
+}
+
+
+#pragma -mark  UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        
+        if (self.test) {
+            self.test = NO;
+            UITextField *nameField = [alertView textFieldAtIndex:0];
+            //获取本地的密码
+            NSString *pwd=[defaults objectForKey:@"pwd"];
+//            NSString *pwd=@"";
+            if([nameField.text isEqualToString:pwd])
+            {
+                self.lblHint.text= @"请输入新密码";
+                self.Flag=YES;
+                self.reSet=NO;
+                self.sureFlag=NO;
+                [self outputSelectedButtons];
+            }
+            else
+            {
+                self.lblHint.text= @"登录密码不正确!";
+
+                NSLog(@"密码不正确");
+                [MBProgressHUD showError:@"登录密码不正确"];
+            
+            }
+            
+        }
+        return;
+    }
+    else
+    {
+        [self popToPreVC:@"NO"];
+        
+    }
+}
+
+
+
+//退出手势界面
+-(void)popToPreVC:(NSString *)switchOn
+{
+    NSArray *array=[self.navigationController viewControllers];
+//    SettingViewController *perVC=(SettingViewController *)[array objectAtIndex:array.count-2];
+    SettingViewController *perVC=[SettingViewController alloc];
+    if ([switchOn isEqualToString:@"YES"]) {
+        perVC.swhOn=YES;
+    }
+    else if ([switchOn isEqualToString:@"NO"]) {
+        perVC.swhOn=NO;
+    }
+    [self.navigationController popViewControllerAnimated:NO];
+    
+}
+
+//点击其他登录方式执行的方法
+- (IBAction)otherPatternClick:(id)sender {
+    
+    NSLog(@"其他登录方式被点击");
+    
+    
+//    [defaults setObject:@"" forKey:@"pwd"];
+    [defaults setBool:NO forKey:@"rem"];
+    [defaults setBool:NO forKey:@"auto"];
+    
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:nil forKey:@"touchLock"];
+
+    //强制同步
+    [defaults synchronize];
+
+    
+    LoginViewController *loginView =[[LoginViewController alloc]init];
+    [self.navigationController pushViewController:loginView animated:YES];
+    
+  
+    
+    
+    
+    
+    
+    
+}
+//点击忘记密码执行的方法
+- (IBAction)forgetPassWordClick:(id)sender {
+    self.test= YES;
+    
+    if (_customAlertView==nil) {
+        _customAlertView = [[UIAlertView alloc] initWithTitle:@"请输入用户密码" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    }
+    [_customAlertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    
+    UITextField *nameField = [_customAlertView textFieldAtIndex:0];
+    nameField.placeholder = @"请输入用户登录密码";
+    _nameField= nameField;
+    [_customAlertView show];
+    
+    
+}
+
+
+@end

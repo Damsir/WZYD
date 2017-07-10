@@ -1,0 +1,86 @@
+﻿{
+    js: [
+        {
+            "path":"http://123.232.100.61:8080/arcgis_js_api/library/3.11/3.11/init.js"
+        },
+        {
+            "path":"script/jquery-1.11.1.min.js"
+        },
+        {
+            "path":"script/dist.ipad.core.js"
+        },
+        {
+            "path": "script/dist.wp8.vScroller.js"
+        },
+        {
+            "path": "script/dist.ipad.iScroll.js"
+        },
+        {
+            "path":"script/dist.map.core.js"
+        },
+        {
+            "path":"script/dist.map.desktop.js"
+        },
+        {
+            "path":"script/dist.map.layerManager.js"
+        },
+        {
+            "path":"script/dist.ipad.touchlink.js"
+        },
+        {
+            "path":"script/dist.ipad.dragList.js"
+        },
+        {
+            "path": "script/gis/dist.gis.mapHelper.js"
+        },
+        {
+            "path": "script/gis/dist.gis.geolocationHelper.js"
+        },
+        {
+            "path": "script/gis/dist.gis.featureLayerHelper.js"
+        },
+
+        {
+            "path": "script/gis/dist.gis.mapLoadHelper.js"
+        },
+        {
+            "path": "script/gis/dist.gis.graphicAttributeWidgetHelper.js"
+        },
+        {
+            "path": "script/gis/dist.gis.measureWidgetHelper.js"
+        },
+        {
+            "path": "script/gis/dist.gis.searchWidgetHelper.js"
+        },
+        {
+            "path": "script/gis/dist.gis.drawWidgetHelper.js"
+        },
+        {
+            "path":  "script/gis/dist.gis.locateProject.js"
+        },
+        {
+            "path":  "script/gis/dist.gis.layerHelper.js"
+        },
+        {
+            "path": "script/gis/dist.gis.tasksHelper.js"
+        },
+        {
+            "path": "script/gis/dist.gis.distMapServerHelper.js"
+        }
+
+    ],
+    css: [
+        {
+            "path":"css/desktop.css"
+        },
+        {
+            "path":"css/colorpicker.css"
+        },
+        {
+            "path":"http://123.232.100.61:8080/arcgis_js_api/library/3.11/3.11/dijit/themes/claro/claro.css"
+        },
+        {
+            "path":"http://123.232.100.61:8080/arcgis_js_api/library/3.11/3.11/esri/css/esri.css"
+        }
+    ]
+}

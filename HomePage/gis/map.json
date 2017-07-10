@@ -1,0 +1,122 @@
+﻿{
+    "defaultMap": 0,
+    "iSearch": true,
+    "draw": true,
+    "measure": true,
+    "layerStyle": false,
+    "route": false,
+    "about": false,
+    "extent": {
+    },
+    "maps": [
+        {
+            "basemap": [
+                {
+                    "name": "国家天地图1-17",
+                    "url": "http://t0.tianditu.com/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&Layer=vec&Style=default&Format=tiles&TileMatrixSet=c",
+                    "minLevel": "1",
+                    "maxLevel": "17",
+                    "type": "wmts",
+                    "visible": true
+                },
+                {
+                    "name": "国家天地图注记1-17",
+                    "url": "http://t0.tianditu.com/cva_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&Layer=cva&Style=default&Format=tiles&TileMatrixSet=c",
+                    "minLevel": "1",
+                    "maxLevel": "17",
+                    "type": "wmts",
+                    "visible": true
+                },
+                {
+                    "name": "温州天地图18-19",
+                    "url": "http://www.go577.com/iserver/services/wzmap2/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&Layer=wzmap2&Style=default&Format=image/png&TileMatrixSet=Custom_wzmap2",
+                    "minLevel": "18",
+                    "maxLevel": "19",
+                    "type": "wmts",
+                    "visible": true
+                },
+                {
+                    "name": "温州天地图注记18-19",
+                    "url": "http://www.go577.com/iserver/services/poi2/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&Layer=poi2&Style=default&Format=image/png&TileMatrixSet=custom_poi2",
+                    "minLevel": "18",
+                    "maxLevel": "19",
+                    "type": "wmts",
+                    "visible": true
+                }
+            ],
+            "imagemap": [
+                {
+                    "name": "国家天地图影像1-17",
+                    "url": "http://t0.tianditu.com/img_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&Layer=img&Styledefault&Format=tiles&TileMatrixSet=c",
+                    "minLevel": "1",
+                    "maxLevel": "17",
+                    "type": "wmts",
+                    "visible": false
+                },
+                {
+                    "name": "国家天地图影像注记1-17",
+                    "url": "http://t0.tianditu.com/cia_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&Layer=cia&Style=default&Format=tiles&TileMatrixSet=c",
+                    "minLevel": "1",
+                    "maxLevel": "17",
+                    "type": "wmts",
+                    "visible": false
+                },
+                {
+                    "name": "温州天地图影像18-19",
+                    "url": "http://www.go577.com/iserver/services/imagemap2/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&Layer=imagemap2&Style=default&Format=image/png&TileMatrixSet=custom_imagemap2",
+                    "minLevel": "18",
+                    "maxLevel": "19",
+                    "type": "wmts",
+                    "visible": false
+                },
+                {
+                    "name": "温州天地图影像注记18-19",
+                    "url": "http://www.go577.com/iserver/services/poi2/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&Layer=poi2&Style=default&Format=image/png&TileMatrixSet=custom_poi2",
+                    "minLevel": "18",
+                    "maxLevel": "19",
+                    "type": "wmts",
+                    "visible": false
+                }
+            ],
+            "dmap": [
+                {
+                    "name": "温州天地图2.5维",
+                    "url": "http://www.go577.com/iserver/services/3dmap/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&Layer=3dmap&Style=default&Format=image/jpg&TileMatrixSet=custom_3dmap",
+                    "minLevel": "12",
+                    "maxLevel": "20",
+                    "type": "wmts",
+                    "visible": false
+                }
+            ],
+            "theme": [
+                {
+                    "name": "专题图层",
+                    "url": "http://61.153.29.236:8111/arcgis/rest/services/wzztt/MapServer",
+                    "defaultVisibleLayers":[-1,0,1],
+                    "proxyUrl": "",
+                    "type": "dynamic",
+                    "opacity":0.5,
+                    "visible": true
+                }
+            ],
+            "description": "",
+            "esrimap": null,
+            "name": "默认方案",
+            "icon": ""
+        }
+    ],
+    "locate": [
+        {
+            "name": "控规",
+            "config": [
+                {
+                    "identify": "YDDM",
+                    "services": "http://61.153.29.236:8111/arcgis/rest/services/wzztt/MapServer",
+                    "layers": [
+                        6
+                    ]
+                }
+            ]
+        }
+    ]
+}

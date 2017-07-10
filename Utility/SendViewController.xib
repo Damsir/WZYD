@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendViewController">
+            <connections>
+                <outlet property="activityTable" destination="Rdx-yn-VjY" id="fXs-ZR-ATf"/>
+                <outlet property="btnComplete" destination="m9C-Cr-X99" id="4k6-vz-QuW"/>
+                <outlet property="searchBar" destination="10w-0b-mce" id="hfV-rS-gIf"/>
+                <outlet property="sendView" destination="SHt-Sc-FJu" id="YC4-fX-CVB"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="Rdx-yn-VjY" customClass="TouchTableView">
+                    <rect key="frame" x="0.0" y="44" width="320" height="464"/>
+                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHt-Sc-FJu">
+                    <rect key="frame" x="0.0" y="508" width="320" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9C-Cr-X99">
+                            <rect key="frame" x="37" y="11" width="246" height="40"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="aB3-wv-vAa"/>
+                                <constraint firstAttribute="width" constant="246" id="f0I-09-S3M"/>
+                            </constraints>
+                            <state key="normal" title="完成">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onBtnCompleteTap:" destination="-1" eventType="touchUpInside" id="ZJn-9S-Nwn"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="m9C-Cr-X99" firstAttribute="top" secondItem="SHt-Sc-FJu" secondAttribute="top" constant="11" id="5Wi-tQ-cL3"/>
+                        <constraint firstAttribute="centerX" secondItem="m9C-Cr-X99" secondAttribute="centerX" id="IEY-Bm-XCk"/>
+                        <constraint firstAttribute="height" constant="60" id="jtN-3p-Qbe"/>
+                    </constraints>
+                </view>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="10w-0b-mce">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="P2L-6C-lxL"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="qbm-At-pr9"/>
+                    </connections>
+                </searchBar>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Rdx-yn-VjY" secondAttribute="trailing" id="1bD-W5-nd6"/>
+                <constraint firstAttribute="trailing" secondItem="10w-0b-mce" secondAttribute="trailing" id="20N-Hw-7Vk"/>
+                <constraint firstItem="10w-0b-mce" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2S4-hD-FzW"/>
+                <constraint firstItem="10w-0b-mce" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2dz-wH-Ke3"/>
+                <constraint firstItem="SHt-Sc-FJu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="LBa-ZN-3q4"/>
+                <constraint firstItem="Rdx-yn-VjY" firstAttribute="top" secondItem="10w-0b-mce" secondAttribute="bottom" id="LF3-L5-6DJ"/>
+                <constraint firstAttribute="bottom" secondItem="SHt-Sc-FJu" secondAttribute="bottom" id="Qfv-8d-agu"/>
+                <constraint firstItem="Rdx-yn-VjY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Yrb-cu-Mwm"/>
+                <constraint firstAttribute="trailing" secondItem="SHt-Sc-FJu" secondAttribute="trailing" id="j6v-T9-xmY"/>
+                <constraint firstItem="SHt-Sc-FJu" firstAttribute="top" secondItem="Rdx-yn-VjY" secondAttribute="bottom" id="pUn-c8-ZJm"/>
+            </constraints>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="271" y="293"/>
+        </view>
+    </objects>
+</document>

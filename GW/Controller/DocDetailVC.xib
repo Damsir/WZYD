@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DocDetailVC">
+            <connections>
+                <outlet property="adLeftMarginC" destination="tYW-y4-NcD" id="D7Q-6N-lWF"/>
+                <outlet property="adviseTFHeightC" destination="KEL-Qu-1ro" id="HEJ-5U-J45"/>
+                <outlet property="adviseTextv" destination="nv7-I0-Z0z" id="acC-FR-8aJ"/>
+                <outlet property="comfirmBtn" destination="jnK-W3-ZTg" id="Lc2-ma-m4Q"/>
+                <outlet property="confirmBtnRightC" destination="Idm-oy-84K" id="IeQ-fK-zCP"/>
+                <outlet property="confirmBtnleftC" destination="mBK-am-38o" id="Lqn-p2-dP4"/>
+                <outlet property="topInformationT" destination="VXx-9h-2iQ" id="B0E-ES-fu0"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnK-W3-ZTg">
+                    <rect key="frame" x="8" y="606" width="359" height="44"/>
+                    <color key="backgroundColor" red="0.13333333333333333" green="0.59607843137254901" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Bc7-by-GLz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="确定">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nv7-I0-Z0z">
+                    <rect key="frame" x="8" y="194" width="359" height="195"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="195" id="KEL-Qu-1ro"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VXx-9h-2iQ">
+                    <rect key="frame" x="0.0" y="8" width="375" height="176"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="176" id="pkH-q8-Zwc"/>
+                    </constraints>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="VXx-9h-2iQ" firstAttribute="centerX" secondItem="nv7-I0-Z0z" secondAttribute="centerX" id="0TQ-Y5-Mgg"/>
+                <constraint firstItem="nv7-I0-Z0z" firstAttribute="top" secondItem="VXx-9h-2iQ" secondAttribute="bottom" constant="10" id="AXZ-Ye-RC3"/>
+                <constraint firstAttribute="trailing" secondItem="jnK-W3-ZTg" secondAttribute="trailing" constant="8" id="Idm-oy-84K"/>
+                <constraint firstItem="VXx-9h-2iQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" id="OE7-K5-vTV"/>
+                <constraint firstAttribute="bottom" secondItem="jnK-W3-ZTg" secondAttribute="bottom" constant="17" id="cMc-Nv-RNz"/>
+                <constraint firstAttribute="trailing" secondItem="nv7-I0-Z0z" secondAttribute="trailing" constant="8" id="eON-F9-Gui"/>
+                <constraint firstItem="jnK-W3-ZTg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="mBK-am-38o"/>
+                <constraint firstItem="nv7-I0-Z0z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="tYW-y4-NcD"/>
+                <constraint firstItem="VXx-9h-2iQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vil-m8-ufm"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="247.5" y="235.5"/>
+        </view>
+    </objects>
+</document>

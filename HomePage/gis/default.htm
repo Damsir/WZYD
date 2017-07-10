@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>地图应用</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10, IE=11">
+    <script id="microloader" type="text/javascript" src="script/microloader.js?v1"></script>
+</head>
+
+<body>
+    <div data-dojo-type="dijit.layout.BorderContainer" data-dojo-props="design:'headline', gutters:false"
+        style="width: 100%; height: 100%; margin: 0; position: absolute; z-index: 0;
+        top: 0;">
+        <div id="mapDiv"></div>
+    </div>
+    <!-- 查询容器 -->
+    <div id="searchContainer"></div>
+
+
+    <input id="baseMapBtn" class="selectedSwitchBtnMap" style="top: 20px;" type="button" value="二维" />
+    <input id="imgMapBtn" class="unSelectedSwitchBtnMap" style="top: 55px;" type="button" value="影像" />
+    <input id="dMapBtn" class="unSelectedSwitchBtnMap" style="top: 90px;" type="button" value="2.5维" />
+
+    <input id="btn-layers" class="unSelectedSwitchBtnMap" style="top: 125px;" type="button" value="图层" />
+    <input id="btn-zoomfull" class="unSelectedSwitchBtnMap" style="top: 160px;" type="button" value="全图" />
+    <!--<input id="btn-clearmap" class="unSelectedSwitchBtnMap" style="top: 195px;" type="button" value="清除" />-->
+    <input id="btn-iSearch" class="unSelectedSwitchBtnMap" style="top: 195px;" type="button" value="i" />
+
+    <!--<div id="btn-layers" style="top:20px" class="layers"></div>-->
+    <!--<div id="btn-zoomfull" style="top:60px" class="zoomfull"></div>-->
+    <!--<div id="btn-clearmap" style="top:100px" class="clearmap"></div>-->
+    <!--<div id="iSearchFlag" style="top:140px" class="isearch-selected">i</div>-->
+
+    <div id="map-control-panel">
+        <div id="defaultHide" style="width:0px;"></div>
+        <div id="panel-title" style="display:none">
+            <div id="btnCloseNav"></div>
+            <div id="navName"></div>
+        </div>
+        <!--<div id="map-toolbar" style="width:60px; display:none;">
+            <span id="btn-layers">图层</span>
+            <span id="btn-zoomfull">全图</span>
+            <span id="btn-clearmap">清除</span>
+            <span id="btnMeasure">量算</span>
+            <span id="btnDraw">绘制</span>
+            <span id="btn-about" style="display:none">关于</span>
+        </div>-->
+
+        <!-- 图层管理 -->
+        <div id="layerPanel" style="width: 230px; height:480px;overflow:auto;display:none" dist-title="图层管理"></div>
+
+        <!-- 绘制容器 -->
+        <div id="drawContainer" style="width:250px; margin:5px; display:none" dist-title="绘制"></div>
+
+        <!-- 查询结果 -->
+        <div id="searchResultContainer" style="width:230px; margin:5px; display:none" dist-title="结果">
+        </div>
+
+        <div id="pointSymbolContainer" style="width:230px;padding:5px; display:none" dist-title="点符号管理">
+            <div class="borderBottom" style=" position:absolute; top:80px; width:100%;">
+                <div class="floatLeft">大小：</div>
+                <img id="pointSizeDown" class="floatLeft" src="images/adown_24.png"></img>
+                <div id="pointSize" class="floatLeft"></div>
+                <div id="pointUnit" class="floatLeft">px </div>
+                <img id="pointSizeUp" class="floatLeft" src="images/aup_24.png"></img>
+            </div>
+            <div class="borderBottom" style="position: absolute; top: 120px; width: 100%;">
+                <div class="floatLeft">
+                    颜色：
+                </div>
+                <select id="pointStyle-color">
+                    <option value=''>默认</option>
+                    <option value="#FF0000">红</option>
+                    <option value="#00FF00">绿</option>
+                    <option value="#0000FF">蓝</option>
+                </select>
+            </div>
+            <div class="borderBottom" style=" position:absolute; top:160px; width:100%;display: none">
+                <div class="floatLeft">恢复：</div>
+                <div class="floatLeft">
+                    <img id="resetPointSymbolBtn" class="floatLeft marginLeft marginRight" src="images/reset_32.png"></img>
+                </div>
+            </div>
+            <div class="borderBottom" style="position: absolute; top: 160px; width: 100%;">
+                <div class="floatLeft">
+                    清除：
+                </div>
+                <div class="floatLeft">
+                    <img id="clearPointSymbolBtn" class="floatLeft marginLeft marginRight" src="images/reset_32.png" />
+                </div>
+            </div>
+        </div>
+
+        <div id="polylineSymbolContainer" style="width:230px;padding:5px; font-size: 13px; display:none" dist-title="线符号管理">
+            <div class="borderBottom" style=" position:absolute; top:80px; width:100%;">
+                <div class="floatLeft">线宽：</div>
+                <img id="polylineSizeDown" class="floatLeft" src="images/adown_24.png"></img>
+                <div id="polylineSize" class="floatLeft"></div>
+                <div id="polylineUnit" class="floatLeft">px </div>
+                <img id="polylineSizeUp" class="floatLeft" src="images/aup_24.png"></img>
+            </div>
+
+            <div class="borderBottom" style=" position:absolute; top:120px; width:100%;">
+                <div class="floatLeft">线形：</div>
+                <div class="floatLeft">
+                    <img id="polylineStyleSolid" class="floatLeft marginLeft marginRight" src="images/linestylesolid_19.png"></img>
+                    <img id="polylineStyleDash" class="floatLeft marginLeft marginRight" src="images/linestyledash_19.png"></img>
+                    <img id="polylineStyleRail" class="floatLeft marginLeft marginRight" src="images/linestylerail_19.png"></img>
+                </div>
+            </div>
+
+            <div class="borderBottom" style="position: absolute; top: 160px; width: 100%;">
+                <div class="floatLeft">
+                    颜色：
+                </div>
+                <div class="floatLeft">
+                    <select id="polyLineStyle-color">
+                        <option value=''>默认</option>
+                        <option value="#FF0000">红</option>
+                        <option value="#00FF00">绿</option>
+                        <option value="#0000FF">蓝</option>
+                    </select>
+                </div>
+                <!-- preview element
+                    <div class="preview"></div>-->
+                <!-- colorpicker element
+                    <div class="colorpicker" style="display:none">
+                        <canvas id="picker" var="1" width="300" height="300"></canvas>
+
+                        <div class="controls" style="display:none">
+                            <div><label>R</label> <input type="text" id="rVal" /></div>
+                            <div><label>G</label> <input type="text" id="gVal" /></div>
+                            <div><label>B</label> <input type="text" id="bVal" /></div>
+                            <div><label>RGB</label> <input type="text" id="rgbVal" /></div>
+                            <div><label>HEX</label> <input type="text" id="hexVal" /></div>
+                        </div>
+                    </div> -->
+            </div>
+
+
+            <div class="borderBottom" style=" position:absolute; top:200px; width:100%; display:none;">
+                <div class="floatLeft">恢复：</div>
+                <div class="floatLeft">
+                    <img id="resetPolylineSymbolBtn" class="floatLeft marginLeft marginRight" src="images/reset_32.png"></img>
+                </div>
+            </div>
+            <div class="borderBottom" style="position: absolute; top: 200px; width: 100%;">
+                <div class="floatLeft">
+                    清除：
+                </div>
+                <div class="floatLeft">
+                    <img id="clearPolyLineSymboBtn" class="floatLeft marginLeft marginRight" src="images/reset_32.png" />
+                </div>
+            </div>
+
+        </div>
+
+        <div id="polygonSymbolContainer" style="width:230px;padding:5px; display:none" dist-title="面符号管理">
+            <div class="borderBottom" style="display:none">
+                <div class="floatLeft">纹理：</div>
+                <div class="floatLeft">
+                    <img id="polygonStyleSolid" class="floatLeft marginLeft marginRight" src="images/rect_24.png"></img>
+                    <img id="polygonStyleDash" class="floatLeft marginLeft marginRight" src="images/horizontal_24.png"></img>
+                    <img id="polygonStyleRail" class="floatLeft marginLeft marginRight" src="images/mesh_24.png"></img>
+                </div>
+            </div>
+            <div>
+                <div class="widget-param">
+                    <div class="widget-param-name">填充色</div>
+                    <div class="widget-param-input">
+                        <select id="polygonStyle-color">
+                            <option value=''>默认</option>
+                            <option value="#FF0000">红</option>
+                            <option value="#00FF00">绿</option>
+                            <option value="#0000FF">蓝</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="widget-param">
+                    <div class="widget-param-name">边框</div>
+                    <div class="widget-param-input">
+                        <select id="polygonStyle-borderWidth">
+                            <option value='null'>无</option>
+                            <option value="#FF0000">1</option>
+                            <option value="#00FF00">2</option>
+                            <option value="#0000FF">4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="widget-param">
+                    <div class="widget-param-name">边框色</div>
+                    <div class="widget-param-input">
+                        <select id="polygonStyle-borderColor">
+                            <option value='null'>默认</option>
+                            <option value="#FF0000">红</option>
+                            <option value="#00FF00">绿</option>
+                            <option value="#0000FF">蓝</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div id="resetPolygonSymbolBtn" class="widget-button" style="display: none">还原</div>
+                <div id="clearPolygonSymboBtn" class="widget-button">清除样式</div>
+            </div>
+
+        </div>
+
+        <div id="layerAlphaContainer" style="width:230px;padding:5px; display:none" dist-title="图层透明度"></div>
+
+        <div id="graphicAttributeContainer" style="width:230px;padding:5px; display:none" dist-title="属性">
+            <div id="graphicAttributeScroller">
+                <div id="graphicAttributeUl" class="prolist"></div>
+            </div>
+        </div>
+
+        <div id="measureContainer" style="width:250px;padding:5px; display:none" dist-title="量算"></div>
+    </div>
+</body>
+
+</html> 

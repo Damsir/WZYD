@@ -1,0 +1,107 @@
+//
+//  WZYD-Prefix.pch
+//  WZYD
+//
+//  Created by 叶松丹 on 16/10/20.
+//  Copyright © 2016年 dist. All rights reserved.
+//
+
+#ifndef WZYD_Prefix_pch
+#define WZYD_Prefix_pch
+
+#define SCREEN_BOUNDS [[UIScreen mainScreen] bounds]
+#define SCREEN_SIZE   [[UIScreen mainScreen] bounds].size
+//#define SCREEN_WIDTH   [[UIScreen mainScreen] bounds].size.width
+//#define SCREEN_HEIGHT   [[UIScreen mainScreen] bounds].size.height
+#define SCREEN_WIDTH   [[UIScreen mainScreen] bounds].size.width
+#define SCREEN_HEIGHT   [[UIScreen mainScreen] bounds].size.height
+#define MainR [[UIScreen mainScreen] bounds]
+#define iPhone ([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone?[[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPad,YES:NO)
+
+#define iOS8 ([[UIDevice currentDevice].systemVersion doubleValue] >= 8.0)
+//判断是否大于 IOS7
+#define IS_IOS7 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")
+
+#define SHKeyWindow [UIApplication sharedApplication].keyWindow
+#define KeyWindow [[[UIApplication sharedApplication] delegate] window]
+
+#define defaults [NSUserDefaults standardUserDefaults]
+#define MENUHEIHT 50
+
+//设置RGB
+#define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+#define RGB(r, g, b) RGBA(r, g, b, 1.0f)
+
+#define GRAYCOLOR [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1]
+#define GRAYCOLOR_CGCOLOR [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1].CGColor
+#define GRAYCOLOR_LIGHT [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1]
+#define BLUECOLOR [UIColor colorWithRed:34.0/255.0 green:152.0/255.0 blue:239.0/255.0 alpha:1]
+#define GRAYCOLOR_MIDDLE [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1]
+#define GRAYCOLOR_DARK [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1]
+#define DefineWeakSelf(weakSelf) __weak __typeof(self) weakSelf = self
+#define HeaderHeight 50.0
+
+//#define Url @"http://61.153.29.236:8891/mobileService/"//测试
+//#define Url @"http://61.153.29.234:8888/mobileService/"//现场(不能动)
+
+// 应用的plist地址(码云)
+#define Plist_Url @"https://git.oschina.net/Damrry/WZYD/raw/master/Info.plist"
+// 应用的版本地址(码云)
+#define VersionUrl_Mayun @"https://git.oschina.net/Damrry/WZYD/raw/master/version.txt"
+// 应用提示更新的内容(马云)
+#define UpdateUrl_Mayun @"https://git.oschina.net/Damrry/WZYD/raw/master/update.txt"
+// 应用的版本地址(公司服务器220)
+#define VersionUrl_Dist @"http://58.246.138.178/AppStore/product/wenzhou/version.txt"
+// 应用的下载地址(蒲公英)
+#define AppDownloadUrl_Pgyer @"https://www.pgyer.com/WZYD"
+// 应用的下载地址(公司服务器220)
+#define AppDownloadUrl_Dist @"http://58.246.138.178/AppStore/product/wenzhou"
+// 应用的APP_ID
+#define PGY_APP_ID @"04333fafeb3cc83c59e45f8d9028b629"
+// 设备UUID
+#define DeviceId @"c9e9163d-5619-3b91-af06-34cb890c496f"
+// 设备验证地址
+#define DeviceVerify_Url @"http://117.149.227.87:50080/MobileService/service/Device.ashx"
+// 提示更新内容
+#define UpdateContent @"更新问题反馈功能"
+
+#define TITLEKEY   @"titleKey"
+
+// 字体
+#define Font_PingFangSC_Light @"PingFangSC-Light"
+#define Font_PingFangSC_Regular @"PingFangSC-Regular"
+#define Font_PingFangSC_Medium @"PingFangSC-Medium"
+/*
+ PingFangSC-Thin
+ PingFangSC-Light
+ PingFangSC-Regular
+ PingFangSC-Medium
+ PingFangSC-Semibold
+ */
+
+/**
+ *  分类按钮的起始tag值
+ */
+#define   NAV_BTN_START_TAG         100
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "errorCode.h"
+#import "HtmlCode.h"
+#import "MBProgressHUD+MJ.h"
+#import "UIViewController+NavigationTitle.h"
+#import "Global.h"
+#import "AFNetworking.h"
+#import "SHBaseViewController.h"
+
+
+#define MyProgressView self.view
+
+//#define  DistMUrl @"http://192.168.2.239:8080"
+#define  DistMUrl @"http://58.246.138.178:8081"
+
+//电子材料
+
+//#define  DigitalUrl @"http://192.168.2.239"
+#define  DigitalUrl @"http://58.246.138.178:8040"
+
+#endif /* WZYD_Prefix_pch */
